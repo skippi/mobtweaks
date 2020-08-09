@@ -1,3 +1,3 @@
-# tuffblocc
+# auratic
 
-Minecraft mod that tweaks explosions to better fit PvE servers.
+Minecraft mod that enhances mobs with aggressive elemental auras.

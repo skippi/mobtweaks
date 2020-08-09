@@ -1,8 +1,8 @@
 [
 {
-  "modid": "tuffblocc",
-  "name": "tuffblocc",
-  "description": "Custom explosion mod",
+  "modid": "auratic",
+  "name": "auratic",
+  "description": "Minecraft mod that enhances mobs with aggressive elemental auras.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",

@@ -21,8 +21,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
-@Mod(modid = "tuffblocc", name = "tuffblocc", version = "1.0", acceptableRemoteVersions = "*")
-public class TuffBloccMod {
+@Mod(modid = "auratic", name = "auratic", version = "1.0", acceptableRemoteVersions = "*")
+public class AuraticMod {
   @EventHandler
   public void init(FMLInitializationEvent event) {
 
