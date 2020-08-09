@@ -30,8 +30,10 @@ public class AuraticMod {
 
   @SubscribeEvent
   public void attachAura(AttachCapabilitiesEvent<Entity> event) {
-    Random random = event.getObject().getEntityWorld().rand;
-    if (!(event.getObject() instanceof EntityMob)) return;
+    Entity entity = event.getObject();
+    if (entity.world.isRemote) return;
+    if (!(entity instanceof EntityMob)) return;
+    Random random = entity.getEntityWorld().rand;
     if (random.nextDouble() < 0.05) {
       event.addCapability(Aura.RESOURCE, new AuraProvider());
     }
@@ -41,6 +43,8 @@ public class AuraticMod {
   public void tickAura(LivingEvent.LivingUpdateEvent event) {
     Aura aura = event.getEntity().getCapability(Aura.CAPABILITY, null);
     if (aura != null) {
+      aura.cooldownTicks = (aura.cooldownTicks + 1) % 5;
+      if (aura.cooldownTicks != 0) return;
       evaporate(event.getEntity().world, new AxisAlignedBB(event.getEntity().getPosition()).grow(3));
     }
   }
