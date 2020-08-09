@@ -41,11 +41,20 @@ public class AuraticMod {
 
   @SubscribeEvent
   public void tickAura(LivingEvent.LivingUpdateEvent event) {
-    Aura aura = event.getEntity().getCapability(Aura.CAPABILITY, null);
+    Entity entity = event.getEntity();
+    Aura aura = entity.getCapability(Aura.CAPABILITY, null);
     if (aura != null) {
-      aura.cooldownTicks = (aura.cooldownTicks + 1) % 5;
-      if (aura.cooldownTicks != 0) return;
-      evaporate(event.getEntity().world, new AxisAlignedBB(event.getEntity().getPosition()).grow(3));
+      apply(aura, entity);
+    }
+  }
+
+  private void apply(Aura aura, Entity entity) {
+    aura.cooldownTicks = (aura.cooldownTicks + 1) % 5;
+    if (aura.cooldownTicks != 0) {
+      AxisAlignedBB area = new AxisAlignedBB(entity.getPosition())
+        .grow(3, 0, 3)
+        .expand(0, 3, 0);
+      evaporate(entity.world, area);
     }
   }
 
