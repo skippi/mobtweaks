@@ -2,27 +2,45 @@ package io.github.skippi;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
-import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod(modid = "auratic", name = "auratic", version = "1.0", acceptableRemoteVersions = "*")
+import java.util.Random;
+
+@Mod(modid = AuraticMod.MOD_ID, name = AuraticMod.MOD_ID, version = "1.0", acceptableRemoteVersions = "*")
 public class AuraticMod {
+  public static final String MOD_ID = "auratic";
+
   @EventHandler
   public void init(FMLInitializationEvent event) {
+    CapabilityManager.INSTANCE.register(Aura.class, new NullStorage<>(), Aura::new);
     MinecraftForge.EVENT_BUS.register(this);
   }
 
   @SubscribeEvent
+  public void attachAura(AttachCapabilitiesEvent<Entity> event) {
+    Random random = event.getObject().getEntityWorld().rand;
+    if (!(event.getObject() instanceof EntityMob)) return;
+    if (random.nextDouble() < 0.05) {
+      event.addCapability(Aura.RESOURCE, new AuraProvider());
+    }
+  }
+
+  @SubscribeEvent
   public void tickAura(LivingEvent.LivingUpdateEvent event) {
-    if (event.getEntity() instanceof EntityPigZombie) {
+    Aura aura = event.getEntity().getCapability(Aura.CAPABILITY, null);
+    if (aura != null) {
       evaporate(event.getEntity().world, new AxisAlignedBB(event.getEntity().getPosition()).grow(3));
     }
   }
