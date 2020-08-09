@@ -34,7 +34,7 @@ public class AuraticMod {
     if (entity.world.isRemote) return;
     if (!(entity instanceof EntityMob)) return;
     Random random = entity.getEntityWorld().rand;
-    if (random.nextDouble() < 0.05) {
+    if (random.nextDouble() < 0.01) {
       event.addCapability(Aura.RESOURCE, new AuraProvider());
     }
   }
