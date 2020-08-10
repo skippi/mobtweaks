@@ -1,7 +1,7 @@
 [
 {
-  "modid": "auratic",
-  "name": "auratic",
+  "modid": "mobtweaks",
+  "name": "mobtweaks",
   "description": "Minecraft mod that enhances mobs with aggressive elemental auras.",
   "version": "${version}",
   "mcversion": "${mcversion}",

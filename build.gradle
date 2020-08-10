@@ -53,7 +53,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title"     : "auratic",
+            "Specification-Title"     : "mobtweaks",
             "Specification-Vendor"    : "skippi",
             "Specification-Version"   : "1", // We are version 1 of ourselves
             "Implementation-Title"    : project.name,
