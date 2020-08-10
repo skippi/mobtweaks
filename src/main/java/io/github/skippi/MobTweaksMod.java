@@ -1,11 +1,10 @@
 package io.github.skippi;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -24,19 +23,19 @@ public class MobTweaksMod {
     "Land speed boost",
     0.3,
     2
-  );
+  ).setSaved(false);
   public static final AttributeModifier WATER_SPEED_BOOST = new AttributeModifier(
     UUID.fromString("eba2f38b-4a27-42e7-9a2f-0ae1fdbbd4a8"),
     "Water speed boost",
     3,
     2
-  );
+  ).setSaved(false);
   public static final AttributeModifier WATER_SWIM_BOOST = new AttributeModifier(
     UUID.fromString("45d116dd-f203-4cbb-9065-4de7440ae653"),
     "Water swim boost",
     2,
     2
-  );
+  ).setSaved(false);
 
   @EventHandler
   public void init(FMLInitializationEvent event) {
@@ -46,7 +45,7 @@ public class MobTweaksMod {
   @SubscribeEvent
   public void updateSpeedBoosts(LivingEvent.LivingUpdateEvent event) {
     EntityLivingBase entity = event.getEntityLiving();
-    if (entity instanceof EntityPlayer) return;
+    if (!(entity instanceof EntityMob)) return;
     IAttributeInstance swimSpeed = entity.getEntityAttribute(EntityLivingBase.SWIM_SPEED);
     IAttributeInstance moveSpeed = entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
     if (entity.isInWater()) {
