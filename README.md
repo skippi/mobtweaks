@@ -1,3 +1,3 @@
 # mobtweaks
 
-Minecraft mod that enhances mobs with aggressive elemental auras.
+Minecraft mod that tweaks mobs to be more threatening.

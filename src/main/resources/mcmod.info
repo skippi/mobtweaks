@@ -2,7 +2,7 @@
 {
   "modid": "mobtweaks",
   "name": "mobtweaks",
-  "description": "Minecraft mod that enhances mobs with aggressive elemental auras.",
+  "description": "Minecraft mod that tweaks mobs to be more threatening.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
